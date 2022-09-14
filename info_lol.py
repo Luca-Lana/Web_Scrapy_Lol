@@ -1,23 +1,23 @@
 import requests
 from bs4 import BeautifulSoup
 
-class InfoLol:
+class WebScrapyLol:
 
-    def __init__(self, champion, lane, header = {'user-agent' : 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'}):
+    def __init__(self, champion, role, header = {'user-agent' : 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'}):
         self.__champion = champion
-        self.__lane     = lane
+        self.__role     = role
         self.__header   = header
-        self.__boots = ['botas da rapidez', 'botas ionianas da lucidez', 'botas da mobilidade', 'botas galvanizadas de aço', 'grevas do berserker', 'sapatos do feiticeiro', 'passos de mercúrio']
+        self.__boots    = ['botas da rapidez', 'botas ionianas da lucidez', 'botas da mobilidade', 'botas galvanizadas de aço', 'grevas do berserker', 'sapatos do feiticeiro', 'passos de mercúrio']
         self.__correct_lane()
 
     def __correct_lane(self):
-        if self.__lane == 'sup':
-            self.__lane = 'support'
-        elif self.__lane == 'jg':
-            self.__lane = 'jungle'
+        if self.__role == 'sup':
+            self.__role = 'support'
+        elif self.__role == 'jg':
+            self.__role = 'jungle'
 
     def __get_html(self):   
-        html = requests.get(f'https://br.op.gg/champions/{self.__champion}/{self.__lane}/build?hl=pt_BR', headers=self.__header)
+        html = requests.get(f'https://br.op.gg/champions/{self.__champion}/{self.__role}/build?hl=pt_BR', headers=self.__header)
         soup = BeautifulSoup(html.content, 'html.parser')
 
         return soup
@@ -46,8 +46,3 @@ class InfoLol:
                 boots.append(item)
 
         return {'starter_items': items[:index_boots[0]], 'boots': boots, 'build': [items[index_boots[1]+1:index_boots[1]+4], items[index_boots[1]+4:index_boots[1]+7] ]}
-        
-        
-
-
-print(InfoLol('lux', 'sup').get_build())
