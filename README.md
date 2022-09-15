@@ -1,4 +1,4 @@
-# Web Scrapy League of Legends Info 🕸
+# Web Scrapy League of Legends 🕸
 
 ## Description 
 
@@ -23,13 +23,8 @@ The "hardest" part of this project was when I had to analyze the code, but after
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the libraries.
 
 ```bash
-pip install requests
-
-pip install beautifulsoup4
-
-pip install html.parser
+pip install -r requirements.txt
 ```
-
 
 ## How to Use the Project
 
