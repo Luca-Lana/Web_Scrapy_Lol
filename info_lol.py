@@ -26,13 +26,13 @@ class WebScrapyLol:
         html = self.__get_html()
         runes = [rune.get('alt') for rune in html.select('div.item img') if 'grayscale' not in rune.get('src')]
 
-        return {runes[0] : runes[1:5], runes[5] : runes[6:]}
+        return False if not runes else {runes[0] : runes[1:5], runes[5] : runes[6:]}
 
     def get_speel(self):         
         html = self.__get_html()
         speels = [speel.get('alt') for speel in html.select('div.css-0 img')]
 
-        return {'speel_1' : speels[:2], 'speel_2' : speels[2:]}
+        return False if not speels else {'speel_1' : speels[:2], 'speel_2' : speels[2:]}
 
     def get_build(self):
         html = self.__get_html()
@@ -45,4 +45,4 @@ class WebScrapyLol:
                 index_boots.append(index)
                 boots.append(item)
 
-        return {'starter_items': items[:index_boots[0]], 'boots': boots, 'build': [items[index_boots[1]+1:index_boots[1]+4], items[index_boots[1]+4:index_boots[1]+7] ]}
+        return False if not items else {'starter_items': items[:index_boots[0]], 'boots': boots, 'build': [items[index_boots[1]+1:index_boots[1]+4], items[index_boots[1]+4:index_boots[1]+7] ]}
