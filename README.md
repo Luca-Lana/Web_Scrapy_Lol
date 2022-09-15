@@ -8,6 +8,9 @@ The python language was chosen beacause in addtion to be my favorite language i 
 
 The "hardest" part of this project was when I had to analyze the code, but after some time analyzing the code I can see the best way to get the information.
 
+## Project Status
+
+The project is completed ✅ but there will still be modifications and improvements.
 
 ## Libraries 📚
 
