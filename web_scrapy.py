@@ -1,10 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 
+
 class WebScrapyLol:
 
-    __header = {'user-agent' : 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'}
-    __boots  = ['botas da rapidez', 'botas ionianas da lucidez', 'botas da mobilidade', 'botas galvanizadas de aço', 'grevas do berserker', 'sapatos do feiticeiro', 'passos de mercúrio']
+    __header = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'}
+    __boots = ['botas da rapidez', 'botas ionianas da lucidez', 'botas da mobilidade', 'botas galvanizadas de aço', 'grevas do berserker', 'sapatos do feiticeiro', 'passos de mercúrio']
         
     @classmethod
     def get_runes(cls, champion, role):
@@ -12,15 +13,15 @@ class WebScrapyLol:
         soup = BeautifulSoup(html.content, 'html.parser')
         runes = [rune.get('alt') for rune in soup.select('div.item img') if 'grayscale' not in rune.get('src')]
 
-        return False if not runes else {runes[0] : runes[1:5], runes[5] : runes[6:]}
+        return False if not runes else {runes[0]: runes[1:5], runes[5]: runes[6:]}
 
     @classmethod
-    def get_speel(cls, champion, role):         
+    def get_speel(cls, champion, role):
         html = requests.get(f'https://br.op.gg/champions/{champion}/{role}/build?hl=pt_BR', headers=cls.__header)
         soup = BeautifulSoup(html.content, 'html.parser')
         speels = [speel.get('alt') for speel in soup.select('div.css-0 img')]
 
-        return False if not speels else {'speel_1' : speels[:2], 'speel_2' : speels[2:]}
+        return False if not speels else {'speel_1': speels[:2], 'speel_2': speels[2:]}
 
     @classmethod
     def get_build(cls, champion, role):
